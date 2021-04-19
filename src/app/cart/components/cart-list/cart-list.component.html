@@ -1,0 +1,15 @@
+<h2>Cart:</h2>
+
+<ng-container *ngIf="addedProducts.length > 0; else emptyCart">
+  <app-product
+    *ngFor="let product of addedProducts; trackBy: trackByItems"
+    [product]="product"
+    (removeOneItem)="removeOneItem($event)"
+    (removeAll)="removeAll($event)"
+    [isProductInCard]="true"
+  ></app-product>
+</ng-container>
+
+<ng-template #emptyCart>
+  Cart is empty. You can buy something from the products list to see it here.
+</ng-template>
