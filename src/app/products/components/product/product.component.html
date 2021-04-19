@@ -1,0 +1,22 @@
+<div class="card product mb-2" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}} <span class="badge bg-secondary">{{getCategory(product.category)}}</span></h5>
+    <p class="card-text">{{product.description}}</p>
+    <p>Price - {{product.price | currency}}</p>
+    <div *ngIf="isProductInCard">
+      Added <span class="badge bg-success text-white">{{product.quantity}}</span> items
+    </div>
+    <button
+      *ngIf="!isProductInCard; else removeOneItem"
+      type="button"
+      class="btn btn-primary"
+      (click)="onBuy()"
+      [disabled]="!product.isAvailable"
+    >Buy</button>
+  </div>
+</div>
+
+<ng-template #removeOneItem>
+  <button type="button" class="btn btn-outline-secondary mr-3"(click)="onRemoveOneItem()">Remove one</button>
+  <button type="button" class="btn btn-outline-secondary"(click)="onRemoveAll()">Remove All</button>
+</ng-template>
