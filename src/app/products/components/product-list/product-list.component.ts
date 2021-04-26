@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.productsSub = this.productsService.getProducts()
-      .subscribe((products) => {
+      .subscribe((products: Product[]) => {
         this.products = products;
       });
   }

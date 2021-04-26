@@ -17,7 +17,7 @@ export class CartListComponent implements OnInit {
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.cartSubscription = this.cartService.addedProducts.subscribe((products) => {
+    this.cartSubscription = this.cartService.addedProducts.subscribe((products: Product[]) => {
       this.addedProducts = products;
     });
   }
