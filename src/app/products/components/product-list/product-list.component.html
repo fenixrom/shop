@@ -1,6 +1,16 @@
 <h2>Products list:</h2>
+<div>
+  <label for="sortOptions">Sort by</label>
+  <select id="sortOptions" [(ngModel)]="selectedOption">
+    <option [value]="i.value" *ngFor="let i of sortOptions">{{i.name}}</option>
+  </select>
+</div>
+<div>
+  <label for="sortDirection">Direction (ASC/DESK)</label>
+  <input id="sortDirection" type="checkbox" [(ngModel)]="order" >
+</div>
 <app-product
-  *ngFor="let product of products"
+  *ngFor="let product of (products$ | async) | orderBy : selectedOption : order"
   [product]="product"
   (buy)="addToCard($event)"
 ></app-product>

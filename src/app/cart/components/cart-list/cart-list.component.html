@@ -2,7 +2,7 @@
 
 <ng-container *ngIf="isProductInCart; else emptyCart">
   <app-cart-item
-    *ngFor="let product of addedProducts; trackBy: trackByItems"
+    *ngFor="let product of (addedProducts$ | async); trackBy: trackByItems"
     appHighlight
     [cartProduct]="product"
     (removeOneItem)="removeOneItem($event)"
