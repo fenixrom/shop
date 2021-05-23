@@ -1,6 +1,6 @@
 <h2>Cart:</h2>
 
-<ng-container *ngIf="addedProducts.length > 0; else emptyCart">
+<ng-container *ngIf="isProductInCart; else emptyCart">
   <app-cart-item
     *ngFor="let product of addedProducts; trackBy: trackByItems"
     appHighlight
@@ -10,10 +10,12 @@
     (removeAll)="removeAll($event)"
   ></app-cart-item>
 
+  <button class="btn btn-secondary" (click)="clearCart()">Remove all products</button>
+
   <div>
     <h5>Details:</h5>
-    <p>Total products - {{totalProducts}}</p>
-    <p>Total price - {{totalPrice}}</p>
+    <p>Total products - {{totalProducts$ | async}}</p>
+    <p>Total price - {{totalPrice$ | async}}</p>
   </div>
 </ng-container>
 
