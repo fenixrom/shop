@@ -1,14 +1,22 @@
 <h2>Cart:</h2>
 
 <ng-container *ngIf="addedProducts.length > 0; else emptyCart">
-  <app-product
+  <app-cart-item
     *ngFor="let product of addedProducts; trackBy: trackByItems"
-    [product]="product"
+    appHighlight
+    [cartProduct]="product"
     (removeOneItem)="removeOneItem($event)"
+    (addOneItem)="addOneItem($event)"
     (removeAll)="removeAll($event)"
-    [isProductInCard]="true"
-  ></app-product>
+  ></app-cart-item>
+
+  <div>
+    <h5>Details:</h5>
+    <p>Total products - {{totalProducts}}</p>
+    <p>Total price - {{totalPrice}}</p>
+  </div>
 </ng-container>
+
 
 <ng-template #emptyCart>
   Cart is empty. You can buy something from the products list to see it here.

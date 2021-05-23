@@ -1,0 +1,11 @@
+<div class="card product mb-2" style="width: 18rem;">
+  <span class="remove-all" (click)="onRemoveAll()">X</span>
+  <div class="card-body">
+    <app-product-info [product]="cartProduct.product"></app-product-info>
+    <p>
+      Added <span class="badge bg-success text-white">{{cartProduct.quantity}}</span> items. With total price {{cartProduct.totalPrice | currency}}
+    </p>
+    <button type="button" class="btn btn-outline-secondary mr-3"(click)="onAddOneItem()">+</button>
+    <button type="button" class="btn btn-outline-secondary"(click)="onRemoveOneItem()">-</button>
+  </div>
+</div>

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Product } from 'src/app/products/models/product.model';
-import { ProductsService } from 'src/app/products/services/products.service';
+import { CartProduct, Product } from 'src/app/shared/models/product.model';
 import { CartService } from '../../services/cart.service';
 
 @Component({
@@ -9,27 +8,52 @@ import { CartService } from '../../services/cart.service';
   templateUrl: './cart-list.component.html',
   styleUrls: ['./cart-list.component.scss']
 })
-export class CartListComponent implements OnInit {
+export class CartListComponent implements OnInit, OnDestroy {
 
-  addedProducts: Product[] = [];
+  addedProducts: CartProduct[] = [];
+  totalProducts = 0;
+  totalPrice = 0;
 
   private cartSubscription!: Subscription;
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.cartSubscription = this.cartService.addedProducts.subscribe((products: Product[]) => {
+    this.cartSubscription = this.cartService.addedProducts.subscribe((products: CartProduct[]) => {
       this.addedProducts = products;
+      this.updateCartDetails();
     });
   }
 
-  trackByItems(index: number, item: Product): number { return item.id; }
+  ngOnDestroy(): void {
+    this.cartSubscription.unsubscribe();
+  }
+
+  trackByItems(index: number, item: CartProduct): number { return item.product.id; }
 
   removeOneItem(product: Product): void {
     this.cartService.removeProduct(product);
   }
 
+  addOneItem(product: Product): void {
+    this.cartService.addProductToList(product);
+  }
+
   removeAll(product: Product): void {
     this.cartService.removeProduct(product, true);
+  }
+
+  updateCartDetails(): void {
+    const details = this.addedProducts.reduce((accumulator, currentValue) => {
+      accumulator.productsCount = accumulator.productsCount + currentValue.quantity;
+      accumulator.totalPrice = accumulator.totalPrice + currentValue.totalPrice;
+      return accumulator;
+    }, {
+      productsCount: 0,
+      totalPrice: 0,
+    });
+
+    this.totalProducts = details.productsCount;
+    this.totalPrice = details.totalPrice;
   }
 
 }

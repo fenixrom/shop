@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/cart/services/cart.service';
 import { Categories } from '../../enums/categories.enum';
-import { Product } from '../../models/product.model';
+import { Product } from '../../../shared/models/product.model';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
