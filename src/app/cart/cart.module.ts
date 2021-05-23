@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   declarations: [CartListComponent, CartItemComponent],
   imports: [
-    CommonModule,
     SharedModule
   ],
   exports: [CartListComponent]

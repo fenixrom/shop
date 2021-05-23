@@ -10,19 +10,16 @@ import { CartService } from '../../services/cart.service';
 })
 export class CartListComponent implements OnInit, OnDestroy {
 
-  addedProducts: CartProduct[] = [];
+  addedProducts$!: Observable<CartProduct[]>;
   totalProducts$!: BehaviorSubject<number>;
   totalPrice$!: BehaviorSubject<number>;
   isProductInCart!: boolean;
 
-  private cartSubscription!: Subscription;
   private productInCartSubscription!: Subscription;
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
-    this.cartSubscription = this.cartService.addedProducts.subscribe((products: CartProduct[]) => {
-      this.addedProducts = products;
-    });
+    this.addedProducts$ = this.cartService.addedProducts;
     this.totalProducts$ = this.cartService.totalQuantity$;
     this.totalPrice$ = this.cartService.totalSum$;
     this.productInCartSubscription = this.cartService.isEmptyCart$.subscribe((isEmpty: boolean) => {
@@ -31,7 +28,6 @@ export class CartListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.cartSubscription.unsubscribe();
     this.productInCartSubscription.unsubscribe();
   }
 
@@ -52,19 +48,5 @@ export class CartListComponent implements OnInit, OnDestroy {
   removeAll(product: Product): void {
     this.cartService.removeProduct(product);
   }
-
-  // updateCartDetails(): void {
-  //   const details = this.addedProducts.reduce((accumulator, currentValue) => {
-  //     accumulator.productsCount = accumulator.productsCount + currentValue.quantity;
-  //     accumulator.totalPrice = accumulator.totalPrice + currentValue.totalPrice;
-  //     return accumulator;
-  //   }, {
-  //     productsCount: 0,
-  //     totalPrice: 0,
-  //   });
-
-  //   this.totalProducts = details.productsCount;
-  //   this.totalPrice = details.totalPrice;
-  // }
 
 }
