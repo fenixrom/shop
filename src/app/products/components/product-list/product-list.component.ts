@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit {
 
   addToCard(product: Product): void {
     console.log(product);
-    this.cartService.addProductToList(product);
+    this.cartService.addProduct(product);
   }
 
 }

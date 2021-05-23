@@ -7,10 +7,12 @@ import { CartModule } from './cart/cart.module';
 import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { SharedModule } from './shared/shared.module';
+import { FirstComponent } from './first/components/first/first.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FirstComponent,
   ],
   imports: [
     BrowserModule,
