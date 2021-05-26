@@ -9,6 +9,6 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     SharedModule,
   ],
-  exports: [ProductComponent, ProductListComponent],
+  exports: [ProductListComponent],
 })
 export class ProductsModule { }

@@ -2,7 +2,7 @@ import { Component, Inject, OnInit, Optional } from '@angular/core';
 import { AppConfig, configToken, configValue } from 'src/app/core/services/constant.service';
 import { generatedString, GeneratorFactory } from 'src/app/core/services/generator.factory';
 import { GeneratorService } from 'src/app/core/services/generator.service';
-import { generatedLocalStorage, localStorageClass, LocalStorageModel } from 'src/app/core/services/local-storage.service';
+import { generatedLocalStorage, localStorageInstance, LocalStorageModel } from 'src/app/core/services/local-storage.service';
 
 @Component({
   selector: 'app-first',
@@ -20,7 +20,7 @@ import { generatedLocalStorage, localStorageClass, LocalStorageModel } from 'src
     },
     {
       provide: generatedLocalStorage,
-      useValue: localStorageClass,
+      useValue: localStorageInstance,
     }
   ]
 })
