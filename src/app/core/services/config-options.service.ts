@@ -14,15 +14,16 @@ export class ConfigOptionsService {
   }
 
   setConfig(config: Partial<ConfigModel>): void {
-    const { id, login, email } = {...config};
-    if (id) {
-      this.config.id = id;
-    }
-    if (login) {
-      this.config.login = login;
-    }
-    if (email) {
-      this.config.email = email;
-    }
+    this.config = { ...this.config, ...config };
+    // const { id, login, email } = {...config};
+    // if (id) {
+    //   this.config.id = id;
+    // }
+    // if (login) {
+    //   this.config.login = login;
+    // }
+    // if (email) {
+    //   this.config.email = email;
+    // }
   }
 }

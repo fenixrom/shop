@@ -6,12 +6,15 @@ import { HostClickDirective } from './directives/host-click.directive';
 import { OrderByPipe } from './pipes/order-by.pipe';
 import { FormsModule } from '@angular/forms';
 
+const customEntities = [
+  ProductInfoComponent,
+  HighlightDirective,
+  HostClickDirective,
+  OrderByPipe
+];
 @NgModule({
   declarations: [
-    ProductInfoComponent,
-    HighlightDirective,
-    HostClickDirective,
-    OrderByPipe
+    customEntities
   ],
   imports: [
     CommonModule,
@@ -20,10 +23,7 @@ import { FormsModule } from '@angular/forms';
   exports: [
     CommonModule,
     FormsModule,
-    ProductInfoComponent,
-    HighlightDirective,
-    HostClickDirective,
-    OrderByPipe
+    customEntities
   ]
 })
 export class SharedModule { }

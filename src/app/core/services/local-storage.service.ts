@@ -24,6 +24,6 @@ export class LocalStorageService {
   }
 }
 
-export const localStorageClass = new LocalStorageService();
+export const localStorageInstance = new LocalStorageService();
 
 export const generatedLocalStorage = new InjectionToken<LocalStorageModel>('generated local storage');
